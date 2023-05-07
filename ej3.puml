@@ -1,0 +1,16 @@
+@startuml
+
+
+(King's Cross) --> (St Pancras)
+(King's Cross) --> (Waterloo)
+(King's Cross) --> (Liverpool St)
+(St Pancras) --> (King's Cross)
+(Waterloo) --> (King's Cross)
+(Waterloo) --> (Victoria)
+(Victoria) --> (Waterloo)
+(Victoria) --> (Paddington)
+(Liverpool St) --> (King's Cross)
+(Liverpool St) --> (Paddington)
+(Paddington) --> (Victoria)
+
+@enduml
