@@ -343,3 +343,5 @@ insertar_vertice(grafo, "12", 'desvio')
 # las estaciones no estan conectadas entre si
 
 
+insertar_arista(grafo, origen="King's Cross", destino="1", ponderacion=1)
+insertar_arista(grafo, origen="", destino="2", ponderacion=1)
