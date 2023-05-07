@@ -1,16 +1,61 @@
 @startuml
 
+skinparam nodesep 0.5
+skinparam ranksep 0.7
 
-(King's Cross) --> (St Pancras)
-(King's Cross) --> (Waterloo)
-(King's Cross) --> (Liverpool St)
-(St Pancras) --> (King's Cross)
-(Waterloo) --> (King's Cross)
-(Waterloo) --> (Victoria)
-(Victoria) --> (Waterloo)
-(Victoria) --> (Paddington)
-(Liverpool St) --> (King's Cross)
-(Liverpool St) --> (Paddington)
-(Paddington) --> (Victoria)
+class KingCross
+class Waterloo
+class Victoria
+class Liverpool
+class Paddington
+class StPancras
+class Desvio1
+class Desvio2
+class Desvio3
+class Desvio4
+class Desvio5
+class Desvio6
+class Desvio7
+class Desvio8
+class Desvio9
+class Desvio10
+class Desvio11
+class Desvio12
+
+KingCross -- Desvio1
+Waterloo -- Desvio1
+
+Desvio1 -- Paddington
+Desvio1 -- Desvio2
+
+Paddington -- Desvio2
+StPancras -- Desvio2
+
+Desvio2 -- Desvio3
+Desvio3 -- Victoria
+
+Desvio3 -- Desvio4
+Desvio4 -- Liverpool
+
+Desvio4 -- Desvio5
+Desvio5 -- Desvio6
+Desvio6 -- Desvio7
+Desvio7 -- Desvio8
+Desvio8 -- Desvio9
+Desvio9 -- Desvio10
+Desvio10 -- Desvio11
+Desvio11 -- Desvio12
+Desvio12 -- Victoria
+
+Victoria -- Desvio5
+Victoria -- Waterloo
+StPancras -- Desvio6
+KingCross -- Desvio7
+Liverpool -- Desvio12
 
 @enduml
+
+
+
+
+

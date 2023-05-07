@@ -337,3 +337,9 @@ insertar_vertice(grafo, "9", 'desvio')
 insertar_vertice(grafo, "10", 'desvio')
 insertar_vertice(grafo, "11", 'desvio')
 insertar_vertice(grafo, "12", 'desvio')
+
+# cada vertice desvio debe teber multiples puntos de entrada y salida
+# cada vertice estacion debe tener como maximo dos salidas o llegadas
+# las estaciones no estan conectadas entre si
+
+
