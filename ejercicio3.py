@@ -316,3 +316,12 @@ def existe_paso(grafo, origen, destino):
     return resultado
 
 
+# cada vértice del grafo no dirigido tendrá un tipo (estación o desvió) y su nombre, en el caso de los desvíos el nombre es un número
+
+grafo = Grafo(False)
+insertar_vertice(grafo, "King's Cross", 'estacion')
+insertar_vertice(grafo, "Waterloo", 'estacion')
+insertar_vertice(grafo, "Victoria Train Station", 'estacion')
+insertar_vertice(grafo,  "Liverpool Street Station", 'estacion')
+insertar_vertice(grafo, "Paddington", 'estacion')
+insertar_vertice(grafo, "St. Pancras", 'estacion')
