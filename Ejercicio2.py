@@ -46,53 +46,50 @@ class GrafoMisiones(object):
     def __init__(self):
         self.misiones = []
 
+    def agregar_mision(self, mision):
+        self.misiones.append(mision)
 
-def insertar_misiones(grafo, mision):
-    grafo.misiones.append(mision)
-    return grafo
+            
+    def prioridad(mision):
+        # Si el general es Palpatine o Darth Vader, la prioridad es alta
+        if mision.general == "Palpatine" or mision.general == "Darth Vader":
+            return "Alta"
+        else:
+            return "Baja"
+        
+    def asignar_recursos(mision):
+        vehículos = ["AT-AT", "AT-RT", "AT-TE", "AT-DP", "AT-ST"]
+        prioridad_mision = GrafoMisiones.prioridad(mision)
+        if prioridad_mision == "Alta":
+            # Asignar recursos manualmente
+            print(f"Asignar recursos {mision.general} manualmente")
+        else:
+            # Asignar recursos automaticamente
+            if mision.tipo == "Exploracion":
+                mision.recursos["Scout Troopers"] = 15
+                mision.recursos["Speeder Bike"] = 2
+            elif mision.tipo == "Contencion":
+                mision.recursos["Stormtroopers"] = 30
+                for i in range(3):
+                    mision.recursos[random.choice(vehículos)] = 1
+            elif mision.tipo == "Ataque":
+                mision.recursos["Stormtroopers"] = 50
 
-
-def prioridad(mision):
-    # Si el general es Palpatine o Darth Vader, la prioridad es alta
-    if mision.general == "Palpatine" or mision.general == "Darth Vader":
-        return "Alta"
-    else:
-        return "Baja"
+                for i in range(7):
+                    mision.recursos[random.choice(vehículos)] = 1
+        return mision.recursos
     
-def asignar_recursos(mision):
-    vehículos = ["AT-AT", "AT-RT", "AT-TE", "AT-DP", "AT-ST"]
-    prioridad_mision = prioridad(mision)
-    if prioridad_mision == "Alta":
-        # Asignar recursos manualmente
-        print("Asignar recursos manualmente")
-    else:
-        # Asignar recursos automaticamente
-        if mision.tipo == "Exploracion":
-            mision.recursos = {"Scout Troopers": 15, "Speeder Bike": 2}
-        elif mision.tipo == "Contencion":
-            mision.recursos = {"Stormtroopers": 30}
-            for i in range(3):
-                mision.recursos[random.choice(vehículos)] = 1
-        elif mision.tipo == "Ataque":
-            mision.recursos = {"Stormtroopers": 50}
-            for i in range(7):
-                mision.recursos[random.choice(vehículos)] = 1
-    return mision.recursos
+    def mostrar_misiones(mision):
+        for mision in grafo.misiones:
+            print("Tipo: " + mision.tipo)
+            print("Planeta: " + mision.planeta)
+            print("General: " + mision.general)
+            print("Recursos: " + str(mision.recursos))
+            print("Prioridad: " + GrafoMisiones.prioridad(mision))
+            print("--------------------------------------------------")
 
-def mostrar_todo(mision):
-    total_recursos = {}
-    while mision is not None:
-        print("Tipo: ", mision.tipo)
-        print("Planeta: ", mision.planeta)
-        print("General: ", mision.general)
-        print("Recursos: ", mision.recursos)
-        print("Prioridad: ", prioridad(mision))
-        print()
-        for recurso in mision.recursos:
-            if recurso in total_recursos:
-                total_recursos[recurso] += mision.recursos[recurso]
-            else:
-                total_recursos[recurso] = mision.recursos[recurso]
+
+
 
 # Experimentacion
 m1= Misiones("Exploracion", "Tatooine", "Palpatine")
@@ -104,19 +101,19 @@ m6= Misiones("Ataque", "Geonosis", "Darth Vader")
 
 grafo = GrafoMisiones()
 
-insertar_misiones(grafo, m1)
-insertar_misiones(grafo, m2)
-insertar_misiones(grafo, m3)
-insertar_misiones(grafo, m4)
-insertar_misiones(grafo, m5)
-insertar_misiones(grafo, m6)
+grafo.agregar_mision(m1)
+grafo.agregar_mision(m2)
+grafo.agregar_mision(m3)
+grafo.agregar_mision(m4)
+grafo.agregar_mision(m5)
+grafo.agregar_mision(m6)
 
 # Asignar recursos
 for mision in grafo.misiones:
-    mision.recursos = asignar_recursos(mision)
+    mision.recursos = GrafoMisiones.asignar_recursos(mision)
 
-# Mostrar todo
-mostrar_todo(grafo)
+# Mostrar misiones
+grafo.mostrar_misiones()
 
     
     
