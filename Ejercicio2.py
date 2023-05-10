@@ -85,6 +85,7 @@ class GrafoMisiones(object):
     
     def mostrar_misiones(mision):
         for mision in grafo.misiones:
+            print("--------------------------------------------------")
             print("Tipo: " + mision.tipo)
             print("Planeta: " + mision.planeta)
             print("General: " + mision.general)
@@ -96,13 +97,12 @@ class GrafoMisiones(object):
 
 
 # Experimentacion
-m1= Misiones("Exploracion", "Tatooine", "Palpatine")
-m2= Misiones("Contencion", "Naboo", "Darth Vader")
-m3= Misiones("Ataque", "Alderaan", "General Grievous")
-m4= Misiones("Exploracion", "Kashyyyk", "General Grievous")
-m5= Misiones("Contencion", "Kamino", "Palpatine")
-m6= Misiones("Ataque", "Geonosis", "Darth Vader")
-
+m1 = Misiones("Exploracion", "Tatooine", "Palpatine")
+m2 = Misiones("Contencion", "Tatooine", "Darth Vader")
+m3 = Misiones("Ataque", "Tatooine", "General Grievous")
+m4 = Misiones("Exploracion", "Tatooine", "General Grievous")
+m5 = Misiones("Contencion", "Tatooine", "General Grievous")
+m6 = Misiones("Ataque", "Tatooine", "General Grievous")
 grafo = GrafoMisiones()
 
 grafo.agregar_mision(m1)
