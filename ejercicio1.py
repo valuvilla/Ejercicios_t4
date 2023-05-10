@@ -19,7 +19,6 @@ class NodoHuffman:
         self.izquierda = None
         self.derecha = None
  
- 
 
 class Arbol:
     def calcular_frecuencias(mensaje):
