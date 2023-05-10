@@ -44,15 +44,12 @@ class Misiones(object):
 
 class GrafoMisiones(object):
     def __init__(self):
-        self.inicio = None
-        self.tamanio = 0
+        self.misiones = []
 
 
 def insertar_misiones(grafo, mision):
-    nodo = Misiones(mision.tipo, mision.planeta, mision.general)
-    nodo.sig = grafo.inicio
-    grafo.inicio = nodo
-    grafo.tamanio += 1
+    grafo.misiones.append(mision)
+    return grafo
 
 
 def prioridad(mision):
@@ -84,20 +81,18 @@ def asignar_recursos(mision):
 
 def mostrar_todo(mision):
     total_recursos = {}
-    for i in range(mision.tamanio):
+    while mision is not None:
         print("Tipo: ", mision.tipo)
-        print("Prioridad: ", prioridad(mision))
         print("Planeta: ", mision.planeta)
         print("General: ", mision.general)
         print("Recursos: ", mision.recursos)
+        print("Prioridad: ", prioridad(mision))
+        print()
         for recurso in mision.recursos:
             if recurso in total_recursos:
                 total_recursos[recurso] += mision.recursos[recurso]
             else:
                 total_recursos[recurso] = mision.recursos[recurso]
-        mision = mision.sig
-    print("Total de recursos: ", total_recursos)
-
 
 # Experimentacion
 m1= Misiones("Exploracion", "Tatooine", "Palpatine")
@@ -117,10 +112,8 @@ insertar_misiones(grafo, m5)
 insertar_misiones(grafo, m6)
 
 # Asignar recursos
-mision = grafo.inicio
-for i in range(grafo.tamanio):
+for mision in grafo.misiones:
     mision.recursos = asignar_recursos(mision)
-    mision = mision.sig
 
 # Mostrar todo
 mostrar_todo(grafo)
