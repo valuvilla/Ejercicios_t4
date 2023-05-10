@@ -1,4 +1,4 @@
-from tda_cola_dinamico import Cola, cola_vacia, arribo, atencion
+from tda_cola import Cola, cola_vacia, arribo, atencion
 
 class nodoArbol(object):
 
