@@ -12,15 +12,14 @@ se consideraran anteúltimo y último respectivamente en el orden alfabético;
 descomprimir los siguientes mensajes –cuyo árbol ha sido construido de la misma manera que el ejemplo visto anteriormente:
 """
 
-class NodoHuffman:
+class NodoHuffman(object):
     def _init_(self, valor, frecuencia):
         self.valor = valor
         self.frecuencia = frecuencia
         self.izquierda = None
         self.derecha = None
  
-
-class Arbol:
+class Arbol(object):
     def calcular_frecuencias(mensaje):
         frecuencias = {}
         for caracter in mensaje:
@@ -36,11 +35,11 @@ class Arbol:
             nodos.append(NodoHuffman(caracter, frecuencia))
         while len(nodos) > 1:
             nodos.sort()
-            nodo_izq = nodos.pop(0)
-            nodo_der = nodos.pop(0)
-            nodo_padre = NodoHuffman(None, nodo_izq.frecuencia + nodo_der.frecuencia)
-            nodo_padre.izquierda = nodo_izq
-            nodo_padre.derecha = nodo_der
+            nodo_izquierda = nodos.pop(0)
+            nodo_derecha = nodos.pop(0)
+            nodo_padre = NodoHuffman(None, nodo_izquierda.frecuencia + nodo_derecha.frecuencia)
+            nodo_padre.izquierda = nodo_izquierda
+            nodo_padre.derecha = nodo_derecha
             nodos.append(nodo_padre)
         return nodos[0]
     
@@ -87,3 +86,4 @@ if __name__ == "__main__":
     mensaje_codificado2="0110101011011100101000111101011100110111010110110100001000111010100101111010011111110111001010001111010111001101110101100001100010011010001110010010001100010110011001110010010000111101111010"
     mensaje_decodificado2=Arbol.decodificar_mensaje(mensaje_codificado2,Arbol.construir_arbol_huffman(frecuencias))
     print(mensaje_decodificado2)
+
