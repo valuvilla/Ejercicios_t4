@@ -62,7 +62,7 @@ class GrafoMisiones(object):
         prioridad_mision = GrafoMisiones.prioridad(mision)
         if prioridad_mision == "Alta":
             # Asignar recursos manualmente
-            print(f"Asignar recursos {mision.general} manualmente")
+            print("Asignar recursos manualmente para la misión {} en el planeta {}.".format(mision.tipo, mision.planeta))
         else:
             # Asignar recursos automaticamente
             if mision.tipo == "Exploracion":
