@@ -11,3 +11,8 @@ se consideraran anteúltimo y último respectivamente en el orden alfabético;
  
 descomprimir los siguientes mensajes –cuyo árbol ha sido construido de la misma manera que el ejemplo visto anteriormente:
 """
+
+from tda_arbol_bin import insertar_nodo, nodoArbolHuffman, por_nivel
+
+def generar_arbol_huffman(tabla):
+    

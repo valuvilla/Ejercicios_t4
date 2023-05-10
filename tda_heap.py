@@ -1,6 +1,4 @@
 
-
-
 def intercambio(vector, indice1, indice2):
     """Intercambia dos valores de la tabla."""
     vector[indice1], vector[indice2] = vector[indice2], vector[indice1]
@@ -118,50 +116,3 @@ def buscar(heap, buscado):
             pos = i
     return pos
 
-# from random import randint
-# nombre = ['ana', 'juan', 'walter', 'tito', 'julieta']
-
-# cola_prioiridad = Heap(10)
-
-# i = 0
-# while(i < 10):
-#     arribo(cola_prioiridad, nombre[randint(0,4)], randint(1, 3))
-#     print(cola_prioiridad.vector)
-#     i += 1
-
-# a = input()
-# cambiar_prioridad(cola_prioiridad, 3, 0)
-
-# while (not heap_vacio(cola_prioiridad)):
-#     print(atencion(cola_prioiridad))
-
-
-
-# monticulo = Heap(20)
-# vector = [3, 2, 8, 0, 4, 6, 88, 99, 1, 2]
-
-# monticulo.vector = vector
-# monticulo.tamanio = 10
-
-# monticulizar(monticulo)
-
-# print(monticulo.vector)
-
-# agregar(monticulo, 4)
-# #print(monticulo.vector)
-# agregar(monticulo, 15)
-# #print(monticulo.vector)
-# agregar(monticulo, 6)
-# #print(monticulo.vector)
-# agregar(monticulo, 1)
-# #print(monticulo.vector)
-# agregar(monticulo, 34)
-# #print(monticulo.vector)
-# agregar(monticulo, 40)
-# #print(monticulo.vector)
-# agregar(monticulo, 10)
-# #print(monticulo.vector)
-# print('tamanio del heap', monticulo.tamanio)
-# heapsort(monticulo)
-# print(monticulo.vector)
-# print('tamanio del heap', monticulo.tamanio)

@@ -17,15 +17,6 @@ class nodoArbolHuffman(object):
         self.info = info
         self.valor = valor
 
-class nodoArbolGreek(object):
-    
-    def __init__(self, info, madre, descipcion=None):
-        self.izq = None
-        self.der = None
-        self.info = info
-        self.madre = madre
-        self.descripcion = descipcion
-
 def insertar_nodo(raiz, dato, nrr=None):
     if(raiz is None):
         raiz = nodoArbol(dato, nrr)
@@ -42,15 +33,6 @@ def inorden(raiz):
         print(raiz.info)
         inorden(raiz.der)
 
-from tda_archivo import leer
-
-def inorden_lightsaber(raiz, archivo):
-    if(raiz is not None):
-        inorden_lightsaber(raiz.izq, archivo)
-        jedi = leer(archivo, raiz.nrr)
-        if(jedi[4].find('green') > -1):
-            print(raiz.info, jedi[4])
-        inorden_lightsaber(raiz.der, archivo)
 
 def postorden(raiz):
     if(raiz is not None):
@@ -152,56 +134,7 @@ def hijo_izq(arbol):
         print(arbol.izq.info)
 
 
-def insertar_nario(padre, hijo):
-    if(padre.izq is None):
-        #print('insertar hijo de', padre.info)
-        padre.izq = hijo
-    else:
-        aux = padre.izq
-        while(aux.der is not None):
-            aux = aux.der
-        #print('insertar hno de', aux.info)
-        aux.der = hijo
 
-
-def por_nivel_nario(raiz):
-    cola = Cola()
-    arribo(cola, raiz)
-    while(not cola_vacia(cola)):
-        nodo = atencion(cola)
-        print(nodo.info)
-        if(nodo.izq is not None):
-            arribo(cola, nodo.izq)
-        hno = nodo.der
-        while(hno is not None):
-            print(hno.info)
-            if(hno.izq is not None):
-                arribo(cola, hno.izq)
-            hno = hno.der
-
-# arbol = None
-
-# arbol = insertar_nodo(arbol, 5)
-# arbol = insertar_nodo(arbol, 3)
-# arbol = insertar_nodo(arbol, 4)
-# arbol = insertar_nodo(arbol, 7)
-# arbol = insertar_nodo(arbol, 9)
-# arbol = insertar_nodo(arbol, 0)
-# arbol = insertar_nodo(arbol, 1)
-# arbol = insertar_nodo(arbol, 6)
-
-# arbol = insertar_nodo(arbol, 7)
-# arbol = insertar_nodo(arbol, 7)
-
-
-# pos = busqueda(arbol, 9)
-# if(pos is not None):
-#     hijo_der(pos)
-#     hijo_izq(pos)
-
-
-# 3 5
-# cantp, canti = 0, 0
 
 def contar(raiz, cp, ci):
     if(raiz is not None):
@@ -225,48 +158,3 @@ def contar_repetidos(raiz, buscado, cant):
         else:
             cant = contar_repetidos(raiz.izq, buscado, cant)
     return cant
-
-# cant = 0
-# bus = 7
-# pos = busqueda(arbol, bus)
-# if(pos is not None):
-#     print('asdas', contar_repetidos(pos, bus, cant))
-# else:
-#     print(0)
-
-
-
-#arbol, dato = eliminar_nodo(arbol, 5)
-# por_nivel(arbol)
-
-# pos = busqueda(arbol, 20)
-# if(pos is not None):
-#     print(pos.info)
-# else:
-#     print(pos)
-
-# from random import randint
-
-# for i in range(0, 1000):
-#     arbol = insertar_nodo(arbol, randint(0, 50000))
-
-# print('barrido inorden')
-# inorden(arbol)
-# a = input()
-# print('barrido preorden')
-# preorden(arbol)
-# a = input()
-# print('barrido postorden')
-# postorden(arbol)
-# a = input()
-# print('barrido por nivel')
-# por_nivel(arbol)
-# # a = input()
-
-# buscado = int(input('ingrese valor buscado '))
-# pos = busqueda(arbol, buscado)
-
-# if(pos is not None):
-#     print('esta')
-# else:
-#     print('no esta')
