@@ -12,7 +12,7 @@ se consideraran anteúltimo y último respectivamente en el orden alfabético;
 descomprimir los siguientes mensajes –cuyo árbol ha sido construido de la misma manera que el ejemplo visto anteriormente:
 """
 
-from tda_arbol_bin import insertar_nodo, nodoArbolHuffman, por_nivel, calcular_frecuencia
+from tda_arbol_bin import crear_arbol_huffman
 # Cargamos los datos con las frecuencias
 tabla = [
     ['A',0.098],
@@ -37,71 +37,45 @@ tabla = [
     [',',0.017]
 ]
 
-# Genero un diccionaro en blanco 
-dic = {}
+# Convertimos la tabla en un diccionario
+frecuencia = {}
+for i in tabla:
+    frecuencia[i[0]] = i[1]
 
-# Generamos un bosuqe ahorra vacio
-bosque = []
-
-for elemento in tabla:
-    nodo = nodoArbolHuffman(elemento[0], elemento[1])
-    bosque.append(nodo)
-
-while(len(bosque) > 1):
-    elemento1 = bosque.pop(0)
-    elemento2 = bosque.pop(0)
-    nodo = nodoArbolHuffman('', elemento1.valor+elemento2.valor)
-    nodo.izq = elemento1
-    nodo.der = elemento2
-    bosque.append(nodo)
-
-def generar_tabla(raiz, dic, cadena=''):
-    if(raiz is not None):
-        if(raiz.izq is None):
-            dic[raiz.info] = cadena
-            #print(raiz.info, cadena)
-        else:
-            cadena += '0'
-            generar_tabla(raiz.izq, dic, cadena)
-            cadena = cadena[0:-1]
-            cadena += '1'
-            generar_tabla(raiz.der, dic, cadena)
-
+print(frecuencia)
 
 def decodificar(cadena, arbol_huff):
     cadena_deco = ''
     raiz_aux = arbol_huff
-    pos = 0
-    while(pos < len(cadena)):
-        if(cadena[pos] == '0'):
+    for bit in cadena:
+        if bit == "0":
             raiz_aux = raiz_aux.izq
-        else:
+        elif bit == "1":
             raiz_aux = raiz_aux.der
-        pos += 1
-        if(raiz_aux.izq is None):
-            cadena_deco += raiz_aux.info
-            raiz_aux = arbol_huff
-        cadena_deco
     return cadena_deco
 
-def codificar_caracter(caracter, arbol_huff):
-    cadena_cod = ''
-    raiz_aux = arbol_huff
-    while(raiz_aux.info != caracter):
-        if(raiz_aux.izq is not None):
-            if(caracter in raiz_aux.izq.info):
-                cadena_cod += '0'
-                raiz_aux = raiz_aux.izq
-            else:
-                cadena_cod += '1'
-                raiz_aux = raiz_aux.der
-    return cadena_cod
+
+def codificar_caracter(raiz, caracter, codigo_actual):
+        if raiz == None:
+            return None
+        if raiz.valor == caracter:
+            return codigo_actual
+        codigo_izq = codificar_caracter(raiz.izq, caracter, codigo_actual + "0")
+        if codigo_izq != None:
+            return codigo_izq
+        codigo_der = codificar_caracter(raiz.der, caracter, codigo_actual + "1")
+        return codigo_der
+
 
 def codificar(cadena, arbol_huff):
     cadena_cod = ''
     for caracter in cadena:
-        cadena_cod += codificar_caracter(caracter, arbol_huff)
+        cadena_cod += codificar_caracter(arbol_huff, caracter, '')
     return cadena_cod
 
+ 
+cadena_codificada="10001011101011000010111010001110000011011000000111100111101001011000011010011100110100010111010111111101000011110011111100111101000110001100000010110101111011111110111010110110111001110110111100111111100101001010010100000101101011000101100110100011100100101100001100100011010110101011111111111011011101110010000100101011000111111100010001110110011001011010001101111101011010001101110000000111001001010100011111100001100101101011100110011110100011000110000001011010111110011100"
+cadena_decodificada = decodificar(cadena_codificada, crear_arbol_huffman(frecuencia))
+print(cadena_decodificada)
 
 

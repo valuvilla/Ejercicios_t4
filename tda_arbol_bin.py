@@ -11,31 +11,67 @@ class nodoArbol(object):
 
 class nodoArbolHuffman(object):
     
-    def __init__(self, info, valor, frecuencia):
+    def __init__(self, valor, frecuencia):
         self.izq = None
         self.der = None
-        self.info = info
         self.valor = valor
         self.frecuencia = frecuencia
 
-def calcular_frecuencia(message):
-    frecuencia = {}
-    for caracter in message:
-        if caracter in frecuencia:
-            frecuencia[caracter] += 1
-        else:
-            frecuencia[caracter] = 1
-    return frecuencia
+def calcular_frecuencias(mensaje):
+                frecuencias = {}
+                for caracter in mensaje:
+                    if caracter in frecuencias:
+                        frecuencias[caracter] += 1
+                    else:
+                        frecuencias[caracter] = 1
+                return frecuencias
 
-def insertar_nodo(raiz, dato, nrr=None):
-    if(raiz is None):
-        raiz = nodoArbol(dato, nrr)
-    else:
-        if(raiz.info > dato):
-            raiz.izq = insertar_nodo(raiz.izq, dato, nrr)
-        else:
-            raiz.der = insertar_nodo(raiz.der, dato, nrr)
-    return raiz
+def construir_arbol_huffman(frecuencias):
+                nodos = []
+                for caracter, frecuencia in frecuencias.items():
+                    nodos.append(nodoArbolHuffman(caracter, frecuencia))
+                while len(nodos) > 1:
+                    nodos.sort()
+                    nodo_izq = nodos.pop(0)
+                    nodo_der = nodos.pop(0)
+                    nodo_padre = nodoArbolHuffman(None, nodo_izq.frecuencia + nodo_der.frecuencia)
+                    nodo_padre.izquierda = nodo_izq
+                    nodo_padre.derecha = nodo_der
+                    nodos.append(nodo_padre)
+                return nodos[0]
+            
+def codificar_caracter(nodo, caracter, codigo_actual):
+                if nodo == None:
+                    return None
+                if nodo.valor == caracter:
+                    return codigo_actual
+                codigo_izq = codificar_caracter(nodo.izquierda, caracter, codigo_actual + "0")
+                if codigo_izq != None:
+                    return codigo_izq
+                codigo_der = codificar_caracter(nodo.derecha, caracter, codigo_actual + "1")
+                return codigo_der
+            
+def codificar_mensaje(mensaje, arbol_huffman):
+                mensaje_codificado = ""
+                for caracter in mensaje:
+                    codigo = codificar_caracter(arbol_huffman, caracter, "")
+                    mensaje_codificado += codigo
+                return mensaje_codificado
+            
+def decodificar_mensaje(mensaje_codificado, arbol_huffman):
+                mensaje_decodificado = ""
+                nodo_actual = arbol_huffman
+                for bit in mensaje_codificado:
+                    if bit == "0":
+                        nodo_actual = nodo_actual.izquierda
+                    elif bit == "1":
+                        nodo_actual = nodo_actual.derecha
+                    if nodo_actual.valor != None:
+                        mensaje_decodificado += nodo_actual.valor
+                        nodo_actual = arbol_huffman
+                return mensaje_decodificado
+
+    
 
 def inorden(raiz):
     if(raiz is not None):
