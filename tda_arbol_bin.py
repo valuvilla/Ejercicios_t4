@@ -11,11 +11,21 @@ class nodoArbol(object):
 
 class nodoArbolHuffman(object):
     
-    def __init__(self, info, valor):
+    def __init__(self, info, valor, frecuencia):
         self.izq = None
         self.der = None
         self.info = info
         self.valor = valor
+        self.frecuencia = frecuencia
+
+def calcular_frecuencia(message):
+    frecuencia = {}
+    for caracter in message:
+        if caracter in frecuencia:
+            frecuencia[caracter] += 1
+        else:
+            frecuencia[caracter] = 1
+    return frecuencia
 
 def insertar_nodo(raiz, dato, nrr=None):
     if(raiz is None):
@@ -158,3 +168,41 @@ def contar_repetidos(raiz, buscado, cant):
         else:
             cant = contar_repetidos(raiz.izq, buscado, cant)
     return cant
+
+def decodificar(cadena, arbol_huff):
+    cadena_deco = ''
+    raiz_aux = arbol_huff
+    pos = 0
+    while(pos < len(cadena)):
+        if(cadena[pos] == '0'):
+            raiz_aux = raiz_aux.izq
+        else:
+            raiz_aux = raiz_aux.der
+        pos += 1
+        if(raiz_aux.izq is None):
+            cadena_deco += raiz_aux.info
+            raiz_aux = arbol_huff
+        cadena_deco
+    return cadena_deco
+
+def codificar_caracter(caracter, arbol_huff):
+    cadena_cod = ''
+    raiz_aux = arbol_huff
+    while(raiz_aux.info != caracter):
+        if(raiz_aux.izq is not None):
+            if(caracter in raiz_aux.izq.info):
+                cadena_cod += '0'
+                raiz_aux = raiz_aux.izq
+            else:
+                cadena_cod += '1'
+                raiz_aux = raiz_aux.der
+    return cadena_cod
+
+def codificar(cadena, arbol_huff):
+    cadena_cod = ''
+    for caracter in cadena:
+        cadena_cod += codificar_caracter(caracter, arbol_huff)
+    return cadena_cod
+
+
+
